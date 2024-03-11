@@ -9,7 +9,7 @@ def get_embedding(text, model="text-embedding-3-small"):
     return client.embeddings.create(input=[text], model=model).data[0].embedding
 
 # Load the JSON data from file
-with open('etf_data.json', 'r') as file:
+with open('etf_data_sample.json', 'r') as file:
     data = json.load(file)
 
 # Generate embeddings for each ETF
@@ -25,5 +25,5 @@ for etf in data:
     etf['summary_embedding'] = summary_embedding
 
 # Save the updated data with embeddings to a new JSON file
-with open('etf_data_with_embeddings.json', 'w') as file:
+with open('etf_data_with_embeddings_sample.json', 'w') as file:
     json.dump(data, file, indent=4)

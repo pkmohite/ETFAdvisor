@@ -1,23 +1,20 @@
 import json
-import os
-import requests
 import numpy as np
 import thepassiveinvestor as pi
-from vertexai.language_models import TextEmbeddingModel
+from sentence_transformers import SentenceTransformer
 
-# Set the path to your service account key file
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_key.json"
+# Load the pre-trained SBERT model
+model = SentenceTransformer('bert-base-nli-mean-tokens')
 
 def get_embedding(text):
-    model = TextEmbeddingModel.from_pretrained("textembedding-gecko@003")
-    embeddings = model.get_embeddings([text])
-    return embeddings[0].values
+    embedding = model.encode(text)
+    return embedding
 
 def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 # Load the JSON data with embeddings from file
-with open('etf_data_with_embeddings.json', 'r') as file:
+with open('etf_data_with_embeddings_SBERT.json', 'r') as file:
     data = json.load(file)
 
 while True:

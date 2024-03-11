@@ -8,7 +8,7 @@ with open('etf_tickers.json', 'r') as file:
     etf_tickers_all = json.load(file)
 
 # Take the tickers from index x to y (inclusive) from the loaded list
-etf_tickers = etf_tickers_all[2501:]
+etf_tickers = etf_tickers_all[:10]
 
 # Initialize an empty list to store the data
 etf_strat = []
@@ -31,7 +31,7 @@ for ticker in etf_tickers:
 
 # Load existing data from etf_data.json file
 try:
-    with open('etf_data.json', 'r') as file:
+    with open('etf_data_sample.json', 'r') as file:
         existing_data = json.load(file)
 except FileNotFoundError:
     existing_data = []
@@ -40,7 +40,7 @@ except FileNotFoundError:
 existing_data.extend(etf_strat)
 
 # Save the updated data structure to the etf_data.json file
-with open('etf_data.json', 'w') as file:
+with open('etf_data_sample.json', 'w') as file:
     json.dump(existing_data, file, indent=4)
 
 print("ETF data appended to etf_data.json file.")
