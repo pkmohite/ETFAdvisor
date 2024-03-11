@@ -17,7 +17,7 @@ def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 # Load the JSON data with embeddings from file
-with open('https://storage.cloud.google.com/etf_repo/etf_data_with_embeddings.json', 'r') as file:
+with open('etf_data_with_embeddings.json', 'r') as file:
     data = json.load(file)
 
 # Get user input
