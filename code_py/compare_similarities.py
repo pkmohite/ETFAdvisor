@@ -1,9 +1,8 @@
 import json
 import os
 import numpy as np
-from scipy.spatial.distance import cosine, euclidean, cdist
-from pyemd import emd
 from vertexai.language_models import TextEmbeddingModel
+import thepassiveinvestor as pi
 
 # Set the path to your service account key file
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_key.json"
@@ -14,63 +13,65 @@ def get_embedding(text):
     return embeddings[0].values
 
 def cosine_similarity(a, b):
-    return 1 - cosine(a, b)
+    a = np.array(a)
+    b = np.array(b)
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 def euclidean_distance(a, b):
-    return euclidean(a, b)
+    a = np.array(a)
+    b = np.array(b)
+    return np.linalg.norm(a - b)
 
-# def earth_movers_distance(a, b):
-#     a = np.array(a)
-#     b = np.array(b)
-#     distance_matrix = cdist(a.reshape(-1, 1), b.reshape(-1, 1), metric='euclidean')
-#     return emd(a, b, distance_matrix)
+def dot_product(a, b):
+    a = np.array(a)
+    b = np.array(b)
+    return np.dot(a, b)
+
+def manhattan_distance(a, b):
+    a = np.array(a)
+    b = np.array(b)
+    return np.sum(np.abs(a - b))
 
 # Load the JSON data with embeddings from file
 with open('etf_data_with_embeddings.json', 'r') as file:
     data = json.load(file)
 
-while True:
-    # Get user input for investment strategy
-    user_input = input("Enter a description of the investment strategy (or type 'exit' to quit): ")
-    
-    if user_input.lower() == 'exit':
-        print("Thank you for using the ETF Recommendation Tool!")
-        break
+# Get user input for investment strategy
+user_input = input("Enter a description of the investment strategy: ")
 
-    # Generate embedding for user input
-    user_input_embedding = get_embedding(user_input)
+# Generate embedding for user input
+user_input_embedding = get_embedding(user_input)
 
-    # Calculate similarity scores using different methods
-    cosine_scores = []
-    euclidean_scores = []
-    # emd_scores = []
+# Calculate similarity using different algorithms
+for etf in data:
+    etf['cosine_similarity'] = cosine_similarity(user_input_embedding, etf['summary_embedding'])
+    etf['euclidean_distance'] = euclidean_distance(user_input_embedding, etf['summary_embedding'])
+    etf['dot_product'] = dot_product(user_input_embedding, etf['summary_embedding'])
+    etf['manhattan_distance'] = manhattan_distance(user_input_embedding, etf['summary_embedding'])
 
-    for etf in data:
-        etf_embedding = etf['summary_embedding']
-        cosine_scores.append(cosine_similarity(user_input_embedding, etf_embedding))
-        euclidean_scores.append(euclidean_distance(user_input_embedding, etf_embedding))
-        # emd_scores.append(earth_movers_distance(user_input_embedding, etf_embedding))
+# Sort ETFs based on each similarity algorithm
+cosine_sorted_data = sorted(data, key=lambda x: x['cosine_similarity'], reverse=True)
+euclidean_sorted_data = sorted(data, key=lambda x: x['euclidean_distance'])
+dot_product_sorted_data = sorted(data, key=lambda x: x['dot_product'], reverse=True)
+manhattan_sorted_data = sorted(data, key=lambda x: x['manhattan_distance'])
 
-    # Sort ETFs based on similarity scores for each method
-    cosine_top5 = sorted(zip(data, cosine_scores), key=lambda x: x[1], reverse=True)[:5]
-    euclidean_top5 = sorted(zip(data, euclidean_scores), key=lambda x: x[1])[:5]
-    # emd_top5 = sorted(zip(data, emd_scores), key=lambda x: x[1])[:5]
+## Print top 5 ETF recommendations for each similarity algorithm
+print("Top 5 ETF Recommendations (Cosine Similarity):")
+for i in range(5):
+    print(f"{i+1}. {cosine_sorted_data[i]['long_name']} ({cosine_sorted_data[i]['ticker']})")
+    print(f"   Cosine Similarity: {cosine_sorted_data[i]['cosine_similarity']}")
 
-    # Print top 5 ETF recommendations for each method
-    print("Top 5 ETF Recommendations (Cosine Similarity):")
-    for i, (etf, score) in enumerate(cosine_top5):
-        print(f"{i+1}. {etf['long_name']} ({etf['ticker']})")
-        print(f"   {etf['summary']}")
-        print(f"   Similarity Score: {score}")
+print("\nTop 5 ETF Recommendations (Euclidean Distance):")
+for i in range(5):
+    print(f"{i+1}. {euclidean_sorted_data[i]['long_name']} ({euclidean_sorted_data[i]['ticker']})")
+    print(f"   Euclidean Distance: {euclidean_sorted_data[i]['euclidean_distance']}")
 
-    print("\nTop 5 ETF Recommendations (Euclidean Distance):")
-    for i, (etf, score) in enumerate(euclidean_top5):
-        print(f"{i+1}. {etf['long_name']} ({etf['ticker']})")
-        print(f"   {etf['summary']}")
-        print(f"   Distance: {score}")
+print("\nTop 5 ETF Recommendations (Dot Product):")
+for i in range(5):
+    print(f"{i+1}. {dot_product_sorted_data[i]['long_name']} ({dot_product_sorted_data[i]['ticker']})")
+    print(f"   Dot Product: {dot_product_sorted_data[i]['dot_product']}")
 
-    # print("\nTop 5 ETF Recommendations (Earth Mover's Distance):")
-    # for i, (etf, score) in enumerate(emd_top5):
-    #     print(f"{i+1}. {etf['long_name']} ({etf['ticker']})")
-    #     print(f"   {etf['summary']}")
-    #     print(f"   Distance: {score}")
+print("\nTop 5 ETF Recommendations (Manhattan Distance):")
+for i in range(5):
+    print(f"{i+1}. {manhattan_sorted_data[i]['long_name']} ({manhattan_sorted_data[i]['ticker']})")
+    print(f"   Manhattan Distance: {manhattan_sorted_data[i]['manhattan_distance']}")
