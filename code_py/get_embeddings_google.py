@@ -17,7 +17,7 @@ with open('etf_data.json', 'r') as file:
     data = json.load(file)
 
 # Load only the first 10 ETFs
-data = data[2000:]
+data = data[:10]
 
 # Initialize an empty list to store the data
 etf_strat = []
@@ -43,7 +43,7 @@ for i, etf in enumerate(data, start=1):
 
 # Load existing data from etf_data.json file
 try:
-    with open('etf_data_with_embeddings.json', 'r') as file:
+    with open('etf_data_with_embeddings_googlesample.json', 'r') as file:
         existing_data = json.load(file)
 except FileNotFoundError:
     existing_data = []
@@ -52,8 +52,8 @@ except FileNotFoundError:
 existing_data.extend(etf_strat)
 
 # Save the updated data structure to the etf_data.json file
-with open('etf_data_with_embeddings.json', 'w') as file:
+with open('etf_data_with_embeddings_googlesample.json', 'w') as file:
     json.dump(existing_data, file, indent=4)
 
-print("ETF data appended to etf_data.json file.")
+print("ETF data appended to etf_data_with_embeddings.json file.")
 print("Number of ETFs processed:", len(existing_data))
