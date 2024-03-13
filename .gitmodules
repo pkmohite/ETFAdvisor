@@ -1,6 +1,3 @@
 [submodule "ThePassiveInvestor"]
 	path = ThePassiveInvestor
 	url = https://github.com/JerBouma/ThePassiveInvestor
-[submodule "rebalance"]
-	path = rebalance
-	url = https://github.com/siavashadpey/rebalance
