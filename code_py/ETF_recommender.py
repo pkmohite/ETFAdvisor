@@ -17,7 +17,7 @@ def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 # Load the JSON data with embeddings from file
-with open('etf_data_with_embeddings.json', 'r') as file:
+with open('etf_data_with_embeddings_v2.json', 'r') as file:
     data = json.load(file)
 
 while True:
@@ -33,7 +33,7 @@ while True:
 
     # Calculate cosine similarity between user input and each ETF
     for etf in data:
-        etf['similarity'] = cosine_similarity(user_input_embedding, etf['summary_embedding'])
+        etf['similarity'] = cosine_similarity(user_input_embedding, etf['embedding'])
 
     # Sort ETFs based on similarity score
     data.sort(key=lambda x: x['similarity'], reverse=True)
