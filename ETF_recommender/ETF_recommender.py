@@ -67,5 +67,5 @@ class ETFRecommender:
 
 # Usage example
 recommender = ETFRecommender()
-recommender.load_data('etf_data_with_embeddings_v2.json')
+recommender.load_data('etf_data_short.json')
 recommender.recommend_etfs()
