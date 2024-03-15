@@ -3,6 +3,7 @@ import streamlit as st
 import json
 from home import display_portfolio
 from change_allocation import change_etf_allocation
+from etf_recommender import etf_recommender_page
 
 def load_portfolio():
     with open('portfolio.json', 'r') as file:
@@ -18,15 +19,17 @@ def main():
     portfolio = load_portfolio()
 
     st.sidebar.title('Navigation')
-    page = st.sidebar.radio('Go to', ['Home', 'Change ETF Allocation'])
+    page = st.sidebar.radio('Go to', ['Home', 'Change ETF Allocation', 'ETF Recommender'])
 
     if page == 'Home':
         display_portfolio(portfolio)
     elif page == 'Change ETF Allocation':
         updated_portfolio = change_etf_allocation(portfolio)
-        if updated_portfolio:
+        if updated_portfolio is not None:
             save_portfolio(updated_portfolio)
             st.sidebar.success('Portfolio updated successfully!')
+    elif page == 'ETF Recommender':
+        etf_recommender_page()
 
 if __name__ == '__main__':
     main()

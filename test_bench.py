@@ -1,3 +1,25 @@
+# import amazon s3 bucket data
+import boto3
+import json
+import pandas as pd
+import numpy as np
+import os
+import re
+import nltk
+from nltk.corpus import stopwords
+
+
+
+
+
+
+
+
+
+
+
+
+#%%
 import json
 
 # import etf_data_with _embeddings_v2.json fro local directory

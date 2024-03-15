@@ -21,7 +21,10 @@ def change_etf_allocation(portfolio):
         if total_allocation != 100:
             st.error('Total allocation must sum up to 100%')
         else:
-            portfolio = rebalance_portfolio(portfolio, selected_bucket, new_allocations)
-            st.success('Portfolio rebalanced successfully!')
+            if new_allocations != etf_allocations:
+                portfolio = rebalance_portfolio(portfolio, selected_bucket, new_allocations)
+                return portfolio
+            else:
+                st.warning('No changes made to the portfolio.')
 
-    return portfolio
+    return None
