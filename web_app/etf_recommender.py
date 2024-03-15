@@ -48,7 +48,7 @@ def etf_recommender_page():
     # Initialize session state for chat history
     if 'chat_history' not in st.session_state:
         st.session_state.chat_history = []
-
+    
     # Add reset button
     if st.button('Reset Chat'):
         st.session_state.chat_history = []

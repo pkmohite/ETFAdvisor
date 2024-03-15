@@ -1,5 +1,5 @@
 {
-  "cash": 184.5,
+  "cash": 95.95999999999913,
   "buckets": [
     {
       "name": "Conservative",
@@ -7,13 +7,13 @@
       "etfs": [
         {
           "ticker": "BND",
-          "allocation": 60,
-          "shares": 0
+          "allocation": 60.0,
+          "shares": 124
         },
         {
           "ticker": "VTI",
-          "allocation": 40,
-          "shares": 58
+          "allocation": 40.0,
+          "shares": 23
         }
       ]
     },
@@ -39,13 +39,13 @@
       "etfs": [
         {
           "ticker": "QQQ",
-          "allocation": 50.0,
-          "shares": 30
+          "allocation": 100.0,
+          "shares": 33
         },
         {
           "ticker": "ARKK",
-          "allocation": 50.0,
-          "shares": 25
+          "allocation": 0.0,
+          "shares": 0
         }
       ]
     }

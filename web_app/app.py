@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 import json
 from home import display_portfolio
@@ -25,7 +24,7 @@ def main():
         display_portfolio(portfolio)
     elif page == 'Change ETF Allocation':
         updated_portfolio = change_etf_allocation(portfolio)
-        if updated_portfolio is not None:
+        if updated_portfolio:
             save_portfolio(updated_portfolio)
             st.sidebar.success('Portfolio updated successfully!')
     elif page == 'ETF Recommender':
