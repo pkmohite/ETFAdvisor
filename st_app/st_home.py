@@ -21,6 +21,11 @@ def fetch_current_price(ticker):
     else:
         return None
 
+# function to fetch ETF Name
+def fetch_etf_name(ticker):
+    stock = yf.Ticker(ticker)
+    return stock.info['longName']
+
 def display_portfolio():
     st.header('Your Portfolio')
     st.subheader('Cash')
@@ -46,4 +51,5 @@ def display_portfolio():
         columns = ['Ticker', 'Allocation', 'Shares', 'Current Price', 'Total Value']
         st.table(etf_data)
 
+st.set_page_config(layout="wide")
 display_portfolio()
