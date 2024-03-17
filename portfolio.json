@@ -1,51 +1,51 @@
 {
-  "cash": 132.73999999999978,
+  "cash": 823.9500000000044,
   "buckets": [
     {
       "name": "Conservative",
-      "allocation": 50,
+      "allocation": 40.0,
       "etfs": [
         {
           "ticker": "BND",
           "allocation": 50.0,
-          "shares": 103
+          "shares": 132
         },
         {
           "ticker": "VTI",
           "allocation": 50.0,
-          "shares": 29
+          "shares": 37
         }
       ]
     },
     {
       "name": "Thematic",
-      "allocation": 25,
+      "allocation": 5.0,
       "etfs": [
         {
           "ticker": "XLK",
           "allocation": 50.0,
-          "shares": 81
+          "shares": 5
         },
         {
           "ticker": "XLV",
           "allocation": 50.0,
-          "shares": 117
+          "shares": 8
         }
       ]
     },
     {
       "name": "Aggressive",
-      "allocation": 25,
+      "allocation": 55.0,
       "etfs": [
         {
           "ticker": "QQQ",
-          "allocation": 70.0,
-          "shares": 23
+          "allocation": 30.0,
+          "shares": 17
         },
         {
           "ticker": "ARKK",
-          "allocation": 30.0,
-          "shares": 89
+          "allocation": 70.0,
+          "shares": 376
         }
       ]
     }
