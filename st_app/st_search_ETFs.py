@@ -20,12 +20,12 @@ col1, col2 = input_container.columns([6, 1])
 user_input = col1.chat_input("Enter a description of the investment strategy:")
 
 # Add reset button in the second column
-if col2.button('Reset'):
+if col2.button("Reset"):
     st.session_state.user_input = ""
 
 if user_input:
     # Display user input in chat
-    with st.chat_message('user'):
+    with st.chat_message("user"):
         st.write(user_input)
 
     # Get ETF recommendations
@@ -35,7 +35,9 @@ if user_input:
     recommendations = pd.DataFrame(recommendations)
 
     # Remove embeddings, similarity score and ticker columns from the recommendations
-    recommendations = recommendations.drop(columns=['embedding', 'similarity', 'ticker'])    
+    recommendations = recommendations.drop(
+        columns=["embedding", "similarity", "ticker"]
+    )
 
     # Display the recommendations in a st.dataframe
     st.dataframe(recommendations)
