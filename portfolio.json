@@ -1,51 +1,79 @@
 {
-  "cash": 686.570000000007,
+  "cash": 612.2500000000109,
   "buckets": [
     {
       "name": "Conservative",
-      "allocation": 25.0,
+      "allocation": 40.0,
       "etfs": [
         {
           "ticker": "BND",
           "allocation": 50.0,
-          "shares": 82
+          "shares": 26
         },
         {
           "ticker": "VTI",
           "allocation": 50.0,
-          "shares": 23
+          "shares": 7
         }
       ]
     },
     {
       "name": "Thematic",
-      "allocation": 25.0,
+      "allocation": 24.0,
       "etfs": [
         {
           "ticker": "XLK",
           "allocation": 50.0,
-          "shares": 28
+          "shares": 5
         },
         {
           "ticker": "XLV",
           "allocation": 50.0,
-          "shares": 40
+          "shares": 7
         }
       ]
     },
     {
       "name": "Aggressive",
-      "allocation": 50.0,
+      "allocation": 16.0,
       "etfs": [
         {
           "ticker": "QQQ",
           "allocation": 30.0,
-          "shares": 16
+          "shares": 1
         },
         {
           "ticker": "ARKK",
           "allocation": 70.0,
-          "shares": 342
+          "shares": 22
+        }
+      ]
+    },
+    {
+      "name": "New Bucket",
+      "allocation": 20.0,
+      "etfs": [
+        {
+          "add": true,
+          "allocation": 50.0,
+          "ticker": "XSMO",
+          "category": "Small Growth",
+          "long_name": "Invesco S&P SmallCap Momentum ETF",
+          "threeYearAverageReturn": 2.40568,
+          "fiveYearAverageReturn": 10.306208999999999,
+          "totalAssets": 324.087616,
+          "shares": 16
+        },
+        {
+          "add": true,
+          "allocation": 50.0,
+          "ticker": "DWAS",
+          "category": "Small Growth",
+          "long_name": "Invesco DWA SmallCap Momentum ETF",
+          "threeYearAverageReturn": -0.31275002,
+          "fiveYearAverageReturn": 12.1676,
+          "totalAssets": 898.817088,
+          "shares": 7
         }
       ]
     }
