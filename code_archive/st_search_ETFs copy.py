@@ -14,7 +14,7 @@ recommender = ETFRecommender()
 input_container = st.container()
 
 # Create two columns within the input container
-col1, col2 = input_container.columns([6, 1])
+col1, col2 = input_container.columns([1, 1])
 
 # Get user input for investment strategy in the first column
 user_input = col1.chat_input("Enter a description of the investment strategy:")
